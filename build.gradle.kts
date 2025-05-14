@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.nutys.simplelog"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
   mavenCentral()
@@ -34,7 +34,7 @@ intellijPlatform {
     }
 
     changeNotes = """
-      Initial version
+      1.0.0 Support the functions of quick insertion and quick deletion
     """.trimIndent()
   }
 }

@@ -42,9 +42,24 @@ class InsertLogStatementAction : AnAction() {
         }
 
         WriteCommandAction.runWriteCommandAction(project) {
-            val offset = editor.caretModel.offset
-            document.insertString(offset, "\n" + logStatement)
-            editor.caretModel.moveToOffset(offset + logStatement.length + 1) // +1 for the newline
+            // Clear selection to prevent replacing selected text
+            if (selectionModel.hasSelection()) {
+                selectionModel.removeSelection()
+            }
+            
+            val caretModel = editor.caretModel
+            val currentLine = document.getLineNumber(caretModel.offset)
+            val lineStartOffset = document.getLineStartOffset(currentLine)
+            val lineText = document.getText(com.intellij.openapi.util.TextRange(lineStartOffset, document.getLineEndOffset(currentLine)))
+            val indent = lineText.takeWhile { it.isWhitespace() }
+
+            // Determine the insertion point: end of the current line to ensure the new log is on the next line
+            val insertOffset = document.getLineEndOffset(currentLine)
+            val textToInsert = "\n" + indent + logStatement
+            
+            document.insertString(insertOffset, textToInsert)
+            // Move caret to the end of the inserted log statement
+            caretModel.moveToOffset(insertOffset + textToInsert.length)
         }
     }
 

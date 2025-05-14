@@ -8,13 +8,18 @@
   <name>SimpleLog</name>
 
   <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-  <vendor url="https://www.yourcompany.com">nutys</vendor>
+  <vendor url="https://github.com/nutys-up/SimpleLog">nutys</vendor>
 
   <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
        Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
   <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    <b>SimpleLog</b> is a simple plugin for IntelliJ IDEA that allows you to insert and delete console.log statements with customizable log statement format.
+     <br/>
+     <b>Features:</b><br/>
+     <ul>
+          <li>（Ctrl+Alt+A）Insert a console.log statement at the cursor position.</li>
+          <li>（Ctrl+Alt+D）Delete all console.log statements that start with "SimpleLog=>".</li>
+     </ul>
   ]]></description>
 
   <!-- Product and plugin compatibility requirements.
@@ -30,7 +35,11 @@
   <actions>
     <action id="SimpleLog.InsertLogStatement" class="com.nutys.simplelog.InsertLogStatementAction"
             text="Insert console.log Statement" description="Inserts a console.log statement at the cursor position.">
-      <keyboard-shortcut keymap="$default" first-keystroke="control alt L"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt A"/>
+    </action>
+    <action id="SimpleLog.DeleteLogStatements" class="com.nutys.simplelog.DeleteLogStatementsAction"
+            text="Delete All SimpleLog Statements" description="Deletes all console.log statements that start with SimpleLog=>">
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt D"/>
     </action>
   </actions>
 </idea-plugin>
